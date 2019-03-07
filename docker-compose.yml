@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  ftp:
+    container_name: vsftpd
+    build:
+      context: .
+    image: vsftpd:${VERSION}
+    env_file:
+      - .env
+    ports:
+      - "20:20"
+      - "21:21"
+      - "49100-49110:49100-49110"
+    restart: unless-stopped
+    volumes:
+      - /home/user/ftp:/${USER}
